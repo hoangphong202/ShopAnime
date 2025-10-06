@@ -14,15 +14,55 @@ public class UserEntity {
     private int id;
 
     @Column(name ="name", nullable = false, unique = true, length = 50)
-    private String Name;
+    private String name;
 
-    @Column(name="email", nullable = false, unique = true, length = 50)
+    @Column(name="email", nullable = true, unique = true, length = 50)
     private String email;
 
-    @Column(name="phone", nullable = false, unique = true, length = 50)
-    private int phone;
+    @Column(name="phone", nullable = true, unique = true, length = 50)
+    private String phone;
 
     @OneToOne
-    @JoinColumn(name = "accountEntity_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
     private AccountEntity accountEntity;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public AccountEntity getAccountEntity() {
+        return accountEntity;
+    }
+
+    public void setAccountEntity(AccountEntity accountEntity) {
+        this.accountEntity = accountEntity;
+    }
 }
