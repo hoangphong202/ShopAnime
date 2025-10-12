@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Cho phép login không cần token
                         .requestMatchers("/home/login").permitAll()
+                        .requestMatchers("/home/register").permitAll()
                         // Các API khác cần token
                         .anyRequest().authenticated()
                 )
