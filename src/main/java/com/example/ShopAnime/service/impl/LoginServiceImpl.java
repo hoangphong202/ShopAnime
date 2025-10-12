@@ -1,6 +1,7 @@
 package com.example.ShopAnime.service.impl;
 
 import com.example.ShopAnime.DTO.LoginRequest;
+import com.example.ShopAnime.DTO.LoginResponse;
 import com.example.ShopAnime.entity.AccountEntity;
 import com.example.ShopAnime.repository.AccountRepository;
 import com.example.ShopAnime.service.LoginService;
@@ -17,18 +18,20 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public boolean login(LoginRequest loginRequest){
+    public LoginResponse login(LoginRequest loginRequest){
+
         AccountEntity account = accountRepository.findByUsername(loginRequest.getUsername()).orElse(null);
 
         if (account == null) {
-            return false; // username không tồn tại
+            return new LoginResponse(false, "username không tồn tại");
         }
 
         if (passwordEncoder.matches(loginRequest.getPassword(), account.getPassword())) {
 
-                return true; // login thành công
+                return new LoginResponse(true,"login thành công");
         } else {
-            return false; // sai mật khẩu
+            return new LoginResponse(false,"sai mật khẩu");
         }
+
     }
 }

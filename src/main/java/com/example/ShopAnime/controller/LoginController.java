@@ -1,6 +1,7 @@
 package com.example.ShopAnime.controller;
 
 import com.example.ShopAnime.DTO.LoginRequest;
+import com.example.ShopAnime.DTO.LoginResponse;
 import com.example.ShopAnime.service.LoginService;
 import com.example.ShopAnime.util.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,15 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        boolean success = loginService.login(loginRequest);
-        if (success) {
+        LoginResponse success = loginService.login(loginRequest);
+        if (success.isSuccess()) {
             String token = jwtUtils.generateToken(loginRequest.getUsername());
             Map<String, Object> response = new HashMap<>();
-            response.put("message", "Login successful");
-            response.put("token", token);
+            response.put("Ket qua: ",success.getMessage());
+            response.put("token: ", token);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(success.getMessage(), HttpStatus.UNAUTHORIZED);
         }
     }
 }
