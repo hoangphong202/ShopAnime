@@ -5,6 +5,5 @@ import com.example.ShopAnime.DTO.LoginRequest;
 import com.example.ShopAnime.DTO.LoginResponse;
 
 public interface LoginService {
-
-    public LoginResponse login(LoginRequest loginRequest);
+    LoginResponse login(LoginRequest loginRequest);
 }

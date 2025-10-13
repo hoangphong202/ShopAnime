@@ -11,7 +11,7 @@ import lombok.Setter;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name ="name", nullable = false, unique = true, length = 50)
     private String name;
@@ -26,11 +26,11 @@ public class UserEntity {
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private AccountEntity accountEntity;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

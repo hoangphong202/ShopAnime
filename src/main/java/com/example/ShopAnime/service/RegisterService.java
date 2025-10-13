@@ -7,5 +7,5 @@ import com.example.ShopAnime.DTO.RegisterResponse;
 
 public interface RegisterService {
 
-    public RegisterResponse register(RegisterRequest registerRequest);
+     RegisterResponse register(RegisterRequest registerRequest);
 }
