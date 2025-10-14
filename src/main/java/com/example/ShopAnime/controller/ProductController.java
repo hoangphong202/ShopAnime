@@ -2,6 +2,7 @@ package com.example.ShopAnime.controller;
 
 
 import com.example.ShopAnime.DTO.ProductDTO;
+import com.example.ShopAnime.DTO.ProductResponse;
 import com.example.ShopAnime.repository.ProductRepository;
 import com.example.ShopAnime.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,12 @@ public class ProductController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id){
 
-        boolean deleted = productService.deleteProduct(id);
+        ProductResponse response = productService.deleteProduct(id);
 
-        if(deleted){
-            return new ResponseEntity<>("xoa san pham thanh cong",HttpStatus.OK);
+        if(response.isSuccess()){
+            return new ResponseEntity<>(response.getMessage(),HttpStatus.OK);
         }else{
-            return new ResponseEntity<>("xoa san pham that bai",HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(response.getMessage(),HttpStatus.UNAUTHORIZED);
         }
 
 
