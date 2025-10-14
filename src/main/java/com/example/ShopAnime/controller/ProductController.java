@@ -10,16 +10,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/products")
 public class ProductController {
 
     @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
     private ProductService productService;
+
+
+    @GetMapping("")
+    public ResponseEntity<?> listProduct(){
+        ProductResponse response = productService.listProduct();
+        if(response.isSuccess()){
+
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(response.getMessage(),HttpStatus.UNAUTHORIZED);
+        }
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id){

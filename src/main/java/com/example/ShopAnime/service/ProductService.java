@@ -4,6 +4,7 @@ import com.example.ShopAnime.DTO.ProductResponse;
 import com.example.ShopAnime.service.impl.ProductServiceImpl;
 
 public interface ProductService {
+    ProductResponse listProduct();
     ProductResponse deleteProduct(Long id) ;
 
 }

@@ -1,10 +1,20 @@
 package com.example.ShopAnime.DTO;
 
 public class ProductDTO {
+    private long id;
     private String name;
     private double price;
     private String description;
     private int stock;
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
