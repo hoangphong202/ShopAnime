@@ -29,8 +29,8 @@ public class LoginController {
         if (success.isSuccess()) {
             String token = jwtUtils.generateToken(loginRequest.getUsername());
             Map<String, Object> response = new HashMap<>();
-            response.put("Ket qua: ",success.getMessage());
-            response.put("token: ", token);
+            response.put("data", success);
+            response.put("token", token);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(success.getMessage(), HttpStatus.UNAUTHORIZED);

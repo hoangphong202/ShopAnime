@@ -28,7 +28,7 @@ public class LoginServiceImpl implements LoginService {
 
         if (passwordEncoder.matches(loginRequest.getPassword(), account.getPassword())) {
 
-                return new LoginResponse(true,"login thành công");
+                return new LoginResponse(true,"login thành công", account.getRole());
         } else {
             return new LoginResponse(false,"sai mật khẩu");
         }
