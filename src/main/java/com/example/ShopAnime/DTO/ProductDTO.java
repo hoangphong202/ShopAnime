@@ -3,10 +3,9 @@ package com.example.ShopAnime.DTO;
 public class ProductDTO {
     private long id;
     private String name;
-    private double price;
+    private long price;
     private String description;
     private int stock;
-
 
     public long getId() {
         return id;
@@ -24,11 +23,11 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public double getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 

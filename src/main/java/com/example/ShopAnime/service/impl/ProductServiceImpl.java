@@ -1,6 +1,7 @@
 package com.example.ShopAnime.service.impl;
 
 import com.example.ShopAnime.DTO.ProductDTO;
+import com.example.ShopAnime.DTO.ProductRequest;
 import com.example.ShopAnime.DTO.ProductResponse;
 import com.example.ShopAnime.entity.ProductEntity;
 import com.example.ShopAnime.repository.ProductRepository;
@@ -16,7 +17,23 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    public ProductResponse addProduct(ProductRequest productRequest) {
+        try {
+            ProductEntity product = new ProductEntity();
+            product.setName(productRequest.getName());
+            product.setPrice(productRequest.getPrice());
+            product.setDescription(productRequest.getDescription());
+            product.setStock(productRequest.getStock());
+            productRepository.save(product);
 
+            return new ProductResponse(true, "Them san pham thanh cong", product);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return new ProductResponse(false, "Thêm sản phẩm thất bại: " + e.getMessage());
+
+        }
+    }
 
     public ProductResponse listProduct(){
         List<ProductEntity> entities = productRepository.findAll();
