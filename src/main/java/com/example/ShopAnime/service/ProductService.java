@@ -8,5 +8,5 @@ public interface ProductService {
     ProductResponse listProduct();
     ProductResponse deleteProduct(Long id) ;
     ProductResponse addProduct(ProductRequest productRequest);
-
+    ProductResponse editProduct(ProductRequest productRequest);
 }

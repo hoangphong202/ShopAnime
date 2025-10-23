@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Override
     public ProductResponse addProduct(ProductRequest productRequest) {
         try {
             ProductEntity product = new ProductEntity();
@@ -35,6 +37,31 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public ProductResponse editProduct(ProductRequest productRequest) {
+        try {
+            Optional<ProductEntity> exist = productRepository.findById(productRequest.getId());
+            if(exist.isEmpty()) {
+                return new ProductResponse(false, "Id san pham ko ton tai");
+            }
+            ProductEntity product = exist.get();
+
+            product.setName(productRequest.getName());
+            product.setPrice(productRequest.getPrice());
+            product.setDescription(productRequest.getDescription());
+            product.setStock(productRequest.getStock());
+            productRepository.save(product);
+
+            return new ProductResponse(true, "Sua san pham thanh cong", product);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return new ProductResponse(false, "Sua sản phẩm thất bại: " + e.getMessage());
+
+        }
+    }
+
+    @Override
     public ProductResponse listProduct(){
         List<ProductEntity> entities = productRepository.findAll();
         List<ProductDTO> result = new ArrayList<>();
@@ -53,6 +80,9 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+
+
+    @Override
     public ProductResponse deleteProduct(Long id) {
         if (productRepository.existsById(id)) {
             productRepository.deleteById(id);

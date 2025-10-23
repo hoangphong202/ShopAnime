@@ -6,6 +6,11 @@ import jakarta.validation.constraints.Positive;
 
 
 public class ProductRequest {
+
+    @NotNull(message = "không được để trống id")
+    @Positive(message = "id lớn hơn 0")
+    private long id;
+
     @NotBlank(message = "Tên sản phẩm không được để trống")
     private String name;
 
@@ -18,6 +23,14 @@ public class ProductRequest {
     @NotNull(message = "Giá không được để trống")
     @Positive(message = "Giá phải lớn hơn 0")
     private long price;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -45,6 +45,17 @@ public class ProductController {
             return new ResponseEntity<>(response,HttpStatus.UNAUTHORIZED);
     }
 
+    @PutMapping("/add")
+    public ResponseEntity<?> editProduct(@Valid @ModelAttribute ProductRequest productRequest) {
+
+        ProductResponse response = productService.addProduct(productRequest);
+
+        if(response.isSuccess()){
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(response,HttpStatus.UNAUTHORIZED);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id){
 
